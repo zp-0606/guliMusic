@@ -54,6 +54,10 @@ Page({
       wx.showToast({
         title: '登录成功'
       })
+      wx.setStorageSync('userInfo', JSON.stringify(result.profile))
+      wx.reLaunch({
+        url: '/pages/personal/personal',
+      })
     }else if(result.code==501){
       wx.showToast({
         title: '手机号错误',
