@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+import request from '../../utils/request.js'
 let startY = 0
 let moveY = 0
 let moveDistance = 0
@@ -10,7 +11,8 @@ Page({
   data: {
     coverTransForm: 'translateY(0)',
     coverTransition: '',
-    userInfo: {}
+    userInfo: {},
+    recentPlayList: []
   },
 
   /**
@@ -19,7 +21,22 @@ Page({
   onLoad: function(options) {
     let info = wx.getStorageSync('userInfo')
     this.setData({
-      userInfo:JSON.parse(info)
+      userInfo: JSON.parse(info)
+    })
+    this.getUserRecentPlayList(this.data.userInfo.userId)
+  },
+  //获取用户最近播放列表
+  async getUserRecentPlayList(userId) {
+    let playList = await request('/user/record', {
+      uid: userId,
+      type: 0
+    })
+    let recentPlayList=playList.allData.splice(0,10).map(item=>{
+      item.id=item.song.id
+      return item
+    })
+    this.setData({
+      recentPlayList
     })
   },
   handleTouchStart(event) {
