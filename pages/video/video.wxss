@@ -34,6 +34,7 @@
 .navItem .active{
     border-bottom: 1rpx solid #d43c33;
 }
+/*视频列表*/
 .videoScroll{
 }
 .videoItem{
