@@ -6,8 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    videoGroupList: [],
-    navId: 0
+    videoGroupList: [],//导航栏标签数据
+    navId: 0,
+    videoList:[]//视频数据
   },
 
   /**
@@ -16,13 +17,23 @@ Page({
   onLoad: function(options) {
     this.getNavGroupListData()
   },
+  //获取视频数据
+ async getVideoListData(navId){
+   let videoListData = await request('/video/group',{id:navId})
+   this.setData({
+     videoList:videoListData.datas
+   })
+  },
+  //获取导航栏数据
   async getNavGroupListData() {
     let navList = await request('/video/group/list')
     this.setData({
       videoGroupList: navList.data.slice(0, 14),
       navId:navList.data[0].id
     })
+    this.getVideoListData(this.data.navId)
   },
+  // 切换导航
   changeNav(event) {
     let id = event.currentTarget.id
     this.setData({
