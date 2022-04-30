@@ -23,7 +23,12 @@
             class="videoScroll"
     >
         <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
-            <video src="{{item.data.urlInfo.url}}" class="common"></video>
+            <video 
+            id="{{item.data.vid}}"
+            src="{{item.data.urlInfo.url}}"
+             class="common"
+             bindplay="handlePlay"
+             ></video>
 
             <view class="content">{{item.data.title}}</view>
 

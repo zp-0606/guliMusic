@@ -53,6 +53,13 @@ Page({
     })
     this.getVideoListData(this.data.navId)
   },
+  //视频播放
+  handlePlay(event){
+    let vid=event.currentTarget.id
+    this.vid!==vid&&this.videoContext&&this.videoContext.stop()
+    this.vid=vid
+    this.videoContext=wx.createVideoContext(vid)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
