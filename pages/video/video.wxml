@@ -1,8 +1,42 @@
 <!--pages/video/video.wxml-->
 <view class="videoContainer">
+<!--    头部区域-->
     <view class="header">
         <image src="/static/images/video/video.jpg"></image>
         <view class="search">搜索商品</view>
         <image src="/static/images/logo.png"></image>
     </view>
+<!--    导航区域-->
+    <scroll-view class="navScroll" scroll-x enable-flex>
+        <view class="navItem">
+            <view class="navContent active">推荐</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent active">万有引力</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">推荐</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">万有引力</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">推荐</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">万有引力</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">推荐</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">万有引力</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">推荐</view>
+        </view>
+        <view class="navItem">
+            <view class="navContent">万有引力</view>
+        </view>
+    </scroll-view>
 </view>
