@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    videoGroupList: [],//导航栏标签数据
+    videoGroupList: [], //导航栏标签数据
     navId: 0,
-    videoList:[]//视频数据
+    videoList: [] //视频数据
   },
 
   /**
@@ -18,23 +18,26 @@ Page({
     this.getNavGroupListData()
   },
   //获取视频数据
- async getVideoListData(navId){
-   let videoListData = await request('/video/group',{id:navId})
-     let index=0
-     let videoList=videoListData.datas.map(item=>{
-         item.id=index++
-         return item
-     })
-   this.setData({
-     videoList:videoListData.datas
-   })
+  async getVideoListData(navId) {
+    let videoListData = await request('/video/group', {
+      id: navId
+    })
+    wx.hideLoading()
+    let index = 0
+    let videoList = videoListData.datas.map(item => {
+      item.id = index++
+        return item
+    })
+    this.setData({
+      videoList: videoListData.datas
+    })
   },
   //获取导航栏数据
   async getNavGroupListData() {
     let navList = await request('/video/group/list')
     this.setData({
       videoGroupList: navList.data.slice(0, 14),
-      navId:navList.data[0].id
+      navId: navList.data[0].id
     })
     this.getVideoListData(this.data.navId)
   },
@@ -42,8 +45,13 @@ Page({
   changeNav(event) {
     let id = event.currentTarget.id
     this.setData({
-      navId: id >>> 0
+      navId: id >>> 0,
+      videoList: []
     })
+    wx.showLoading({
+      title: '正在加载中'
+    })
+    this.getVideoListData(this.data.navId)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
