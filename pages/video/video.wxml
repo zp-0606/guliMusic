@@ -24,12 +24,15 @@
     >
         <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
             <video 
+            autoplay
             id="{{item.data.vid}}"
             src="{{item.data.urlInfo.url}}"
              class="common"
              bindplay="handlePlay"
+             poster="{{item.data.coverUrl}}"
+            wx:if="{{videoId===item.data.vid}}"
              ></video>
-
+             <image wx:else bindtap="handlePlay" id="{{item.data.vid}}" class="common" src="{{item.data.coverUrl}}"></image>
             <view class="content">{{item.data.title}}</view>
 
             <view class="footer">

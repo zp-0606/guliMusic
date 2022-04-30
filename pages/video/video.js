@@ -8,7 +8,8 @@ Page({
   data: {
     videoGroupList: [], //导航栏标签数据
     navId: 0,
-    videoList: [] //视频数据
+    videoList: [], //视频数据
+    videoId:''
   },
 
   /**
@@ -24,7 +25,8 @@ Page({
     })
     wx.hideLoading()
     let index = 0
-    let videoList = videoListData.datas.map(item => {
+   let {list=[]}=videoListData.datas
+    let videoList = list.map(item => {
       item.id = index++
         return item
     })
@@ -56,8 +58,11 @@ Page({
   //视频播放
   handlePlay(event){
     let vid=event.currentTarget.id
-    this.vid!==vid&&this.videoContext&&this.videoContext.stop()
-    this.vid=vid
+    this.setData({
+      videoId:vid
+    })
+    // this.vid!==vid&&this.videoContext&&this.videoContext
+    // this.vid=vid
     this.videoContext=wx.createVideoContext(vid)
   },
   /**
