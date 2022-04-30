@@ -20,6 +20,11 @@ Page({
   //获取视频数据
  async getVideoListData(navId){
    let videoListData = await request('/video/group',{id:navId})
+     let index=0
+     let videoList=videoListData.datas.map(item=>{
+         item.id=index++
+         return item
+     })
    this.setData({
      videoList:videoListData.datas
    })
