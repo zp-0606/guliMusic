@@ -1,0 +1,10 @@
+<!--pages/recommendSong/recommendSong.wxml-->
+<view class="recommendContainer">
+    <view class="header">
+        <image src="/static/images/recommendSong/recommendSong.jpg"></image>
+        <view class="date">
+            <text class="day">1 / </text>
+            <text class="month">5</text>
+        </view>
+    </view>
+</view>

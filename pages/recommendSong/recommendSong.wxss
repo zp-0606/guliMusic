@@ -1,0 +1,25 @@
+/* pages/recommendSong/recommendSong.wxss */
+.recommendContainer .header{
+    position: relative;
+    width: 100%;
+    height: 300rpx;
+}
+.recommendContainer .header image{
+    width: 100%;
+    height: 100%;
+}
+.recommendContainer .header .date{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -150rpx;
+    margin-top: -50rpx;
+    width: 300rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #fff;
+}
+.recommendContainer .date .day{
+    font-size: 38rpx;
+}
