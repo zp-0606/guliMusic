@@ -18,7 +18,7 @@
         </view>
     </scroll-view>
 <!--    视频列表区域-->
-    <scroll
+    <scroll-view
             scroll-y
             class="videoScroll"
     >
@@ -54,6 +54,6 @@
                 </view>
             </view>
         </view>
-    </scroll>
+    </scroll-view>
 </view>
 
