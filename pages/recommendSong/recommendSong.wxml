@@ -17,75 +17,11 @@
 
 <!--        内容区-->
         <scroll-view scroll-y class="listScroll">
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
+            <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
+                <image src="{{item.album.picUrl}}"></image>
                 <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
-                </view>
-                <text class="iconfont icon-gengduo1"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg"></image>
-                <view class="musicInfo">
-                    <text class="musicName">光辉岁月</text>
-                    <text class="author">beyond</text>
+                    <text class="musicName">{{item.name}}</text>
+                    <text class="author">{{item.artists[0].name}}</text>
                 </view>
                 <text class="iconfont icon-gengduo1"></text>
             </view>
