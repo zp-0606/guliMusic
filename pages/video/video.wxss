@@ -36,6 +36,7 @@
 }
 /*视频列表*/
 .videoScroll{
+  height: calc(100vh - 152rpx);
 }
 .videoItem{
     margin-top: 10rpx;

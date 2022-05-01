@@ -7,9 +7,11 @@ Page({
    */
   data: {
     videoGroupList: [], //导航栏标签数据
-    navId: 0,
+    navId: 0,   //标识导航栏
     videoList: [], //视频数据
-    videoId:''
+    videoId:'' ,  //标识视频的id
+    videoUpdataList:[],  //视频播放进度
+    isTriggered:false,  //下拉刷新触发
   },
 
   /**
@@ -31,7 +33,8 @@ Page({
         return item
     })
     this.setData({
-      videoList: videoListData.datas
+      videoList: videoListData.datas,
+      isTriggered:false
     })
   },
   //获取导航栏数据
@@ -55,7 +58,7 @@ Page({
     })
     this.getVideoListData(this.data.navId)
   },
-  //视频播放
+  //视频播放的回调
   handlePlay(event){
     let vid=event.currentTarget.id
     this.setData({
@@ -64,6 +67,43 @@ Page({
     // this.vid!==vid&&this.videoContext&&this.videoContext
     // this.vid=vid
     this.videoContext=wx.createVideoContext(vid)
+    let {videoUpdataList}=this.data
+    let videoItem=videoUpdataList.find(item=>item.vid===vid)
+    if(videoItem){
+      this.videoContext.seek(videoItem.currentTime)
+    }
+  },
+  //保存视频播放进度的回调
+  handleUpdate(event){
+    let videoPlayObj={vid:event.currentTarget.id,currentTime:event.detail.currentTime}
+    let {videoUpdataList}=this.data
+    let videoItem=videoUpdataList.find(item=>item.vid===videoPlayObj.vid)
+    if(videoItem){
+      videoItem.currentTime=videoPlayObj.currentTime
+    }else{
+      videoUpdataList.push(videoPlayObj)
+    }
+    console.log(111)
+    this.setData({
+      videoUpdataList
+    })
+
+  },
+  //视频播放结束调用的回调
+  handleEnded(event){
+    let {videoUpdataList}=this.data
+    videoUpdataList.splice(videoUpdataList.findIndex(item=>item.vid===event.currentTarget.id),1)
+    this.setData({
+      videoUpdataList
+    })
+  },
+  //下拉刷新的回调
+  handleRefresher(){
+    this.getVideoListData(this.data.navId)
+  },
+  //上拉触底的回调
+  async handleToLower(){
+    console.log('上拉触底')
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -110,7 +150,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function({from}) {
+    if(from === 'button'){
+      return {
+        title: '来自button的转发',
+        page: '/pages/video/video',
+        imageUrl: '/static/images/nvsheng.jpg'
+      }
+    }else {
+      return {
+        title: '来自menu的转发',
+        page: '/pages/video/video',
+        imageUrl: '/static/images/nvsheng.jpg'
+      }
+    }
   }
 })
