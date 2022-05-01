@@ -10,7 +10,8 @@ Page({
     navId: 0,   //标识导航栏
     videoList: [], //视频数据
     videoId:'' ,  //标识视频的id
-    videoUpdataList:[]  //视频播放进度
+    videoUpdataList:[],  //视频播放进度
+    isTriggered:false,  //下拉刷新触发
   },
 
   /**
@@ -32,7 +33,8 @@ Page({
         return item
     })
     this.setData({
-      videoList: videoListData.datas
+      videoList: videoListData.datas,
+      isTriggered:false
     })
   },
   //获取导航栏数据
@@ -94,6 +96,14 @@ Page({
     this.setData({
       videoUpdataList
     })
+  },
+  //下拉刷新的回调
+  handleRefresher(){
+    this.getVideoListData(this.data.navId)
+  },
+  //上拉触底的回调
+  async handleToLower(){
+    console.log('上拉触底')
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
