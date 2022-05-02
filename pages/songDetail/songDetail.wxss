@@ -15,6 +15,7 @@
     background: #fff;
     margin: 10rpx 0;
 }
+/*摇杆*/
 .needle{
     position: relative;
     z-index: 99;
@@ -22,13 +23,21 @@
     left: 60rpx;
     width: 192rpx;
     height: 274rpx;
+    transform-origin: 40rpx 0;
+    transform: rotate(-20deg);
+    transition: transform 1s;
 }
+.needleRotate{
+    transform: rotate(0deg);
+}
+/*磁盘*/
 .discContainer{
     position: relative;
     top: -170rpx;
     width: 598rpx;
     height: 598rpx;
 }
+
 .disc{
     width: 598rpx;
     height: 598rpx;
