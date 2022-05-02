@@ -37,7 +37,16 @@
     width: 598rpx;
     height: 598rpx;
 }
-
+.discAnimation{
+    animation: disc 4s linear infinite;
+    animation-delay: 1s;
+}
+@keyframes disc {
+    from{}
+    to{
+        transform: rotate(360deg);
+    }
+}
 .disc{
     width: 598rpx;
     height: 598rpx;
