@@ -41,7 +41,13 @@ Page({
       recommendList:recommendSongData.recommend
     })
   },
-
+  //跳转歌曲详情页的回调
+  toSongDetail(event){
+    let song=event.currentTarget.dataset.song
+    wx.navigateTo({
+      url:'/pages/songDetail/songDetail?musicId='+song.id
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
