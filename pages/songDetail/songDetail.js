@@ -1,19 +1,34 @@
 // pages/songDetail/songDetail.js
+
+
+import request from "../../utils/request";
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isPlay:false
+    isPlay:false,
+    song:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let songId=options.musicId
-    console.log(songId)
+    let musicId=options.musicId
+    this.getSongInfo(musicId)
+  },
+  //获取歌曲数据的回调
+ async getSongInfo(musicId){
+    let musicData=await request('/song/detail',{ids:musicId})
+   this.setData({
+     song:musicData.songs[0]
+   })
+     wx.setNavigationBarTitle({
+         title:this.data.song.ar[0].name
+     })
   },
   // 点击播放/暂停的回调
   handleMusicPlay(){
