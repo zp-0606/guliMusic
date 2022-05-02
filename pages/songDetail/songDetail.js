@@ -23,7 +23,23 @@ Page({
       this.setData({
           musicId
       })
+      this.backgroundAudioManager=wx.getBackgroundAudioManager()
+      this.backgroundAudioManager.onPlay(()=>{
+          this.changePlayState(true)
+      })
+      this.backgroundAudioManager.onPause(()=>{
+          this.changePlayState(false)
+      })
+      this.backgroundAudioManager.onStop(()=>{
+          this.changePlayState(false)
+      })
   },
+    //修改播放状态
+    changePlayState(isPlay){
+        this.setData({
+            isPlay
+        })
+    }
   //获取歌曲数据的回调
  async getSongInfo(musicId){
     let musicData=await request('/song/detail',{ids:musicId})
@@ -44,15 +60,13 @@ Page({
   },
   //歌曲播放/暂停的回调
   async musicControl(isPlay,musicId){
-      let backgroundAudioManager=wx.getBackgroundAudioManager()
       if(isPlay){
          let musicLinkData=await request('/song/url',{id:musicId});
-         console.log(musicLinkData)
          let musicLink=musicLinkData.data[0].url
-          backgroundAudioManager.src=musicLink
-          backgroundAudioManager.title=this.data.song.name
+          this.backgroundAudioManager.src=musicLink
+          this.backgroundAudioManager.title=this.data.song.name
       }else{
-          backgroundAudioManager.pause()
+          this.backgroundAudioManager.pause()
       }
   },
   /**
