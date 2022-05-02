@@ -2,7 +2,7 @@
 
 
 import request from "../../utils/request";
-
+const appInstance=getApp()
 Page({
 
   /**
@@ -23,9 +23,15 @@ Page({
       this.setData({
           musicId
       })
+      if(appInstance.globalData.isMusicPlay&&appInstance.globalData.musicId===musicId){
+          this.setData({
+              isPlay:true
+          })
+      }
       this.backgroundAudioManager=wx.getBackgroundAudioManager()
       this.backgroundAudioManager.onPlay(()=>{
           this.changePlayState(true)
+          appInstance.globalData.musicId=musicId
       })
       this.backgroundAudioManager.onPause(()=>{
           this.changePlayState(false)
@@ -39,7 +45,8 @@ Page({
         this.setData({
             isPlay
         })
-    }
+        appInstance.globalData.isMusicPlay=isPlay
+    },
   //获取歌曲数据的回调
  async getSongInfo(musicId){
     let musicData=await request('/song/detail',{ids:musicId})
