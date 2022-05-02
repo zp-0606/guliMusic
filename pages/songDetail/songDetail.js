@@ -11,6 +11,7 @@ Page({
   data: {
     isPlay:false,
     song:{},
+      musicId:''
   },
 
   /**
@@ -19,6 +20,9 @@ Page({
   onLoad: function (options) {
     let musicId=options.musicId
     this.getSongInfo(musicId)
+      this.setData({
+          musicId
+      })
   },
   //获取歌曲数据的回调
  async getSongInfo(musicId){
@@ -36,6 +40,20 @@ Page({
     this.setData({
       isPlay
     })
+      this.musicControl(isPlay,this.data.musicId)
+  },
+  //歌曲播放/暂停的回调
+  async musicControl(isPlay,musicId){
+      let backgroundAudioManager=wx.getBackgroundAudioManager()
+      if(isPlay){
+         let musicLinkData=await request('/song/url',{id:musicId});
+         console.log(musicLinkData)
+         let musicLink=musicLinkData.data[0].url
+          backgroundAudioManager.src=musicLink
+          backgroundAudioManager.title=this.data.song.name
+      }else{
+          backgroundAudioManager.pause()
+      }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
