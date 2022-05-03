@@ -14,7 +14,8 @@ Page({
     musicId: '',
     musicLink:'',
     currentTime:'00:00',
-    durationTime:'00:00'
+    durationTime:'00:00',
+    currentWidth:0
   },
 
   /**
@@ -42,10 +43,13 @@ Page({
     this.backgroundAudioManager.onStop(() => {
       this.changePlayState(false)
     })
+    //监听音乐实时播放的进度
     this.backgroundAudioManager.onTimeUpdate(()=>{
       let currentTime=moment(this.backgroundAudioManager.currentTime*1000).format('mm:ss')
+      let currentWidth=this.backgroundAudioManager.currentTime/this.backgroundAudioManager.duration*450
       this.setData({
-        currentTime
+        currentTime,
+        currentWidth
       })
     })
   },
