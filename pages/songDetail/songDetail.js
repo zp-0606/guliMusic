@@ -42,6 +42,12 @@ Page({
     this.backgroundAudioManager.onStop(() => {
       this.changePlayState(false)
     })
+    this.backgroundAudioManager.onTimeUpdate(()=>{
+      let currentTime=moment(this.backgroundAudioManager.currentTime*1000).format('mm:ss')
+      this.setData({
+        currentTime
+      })
+    })
   },
   //修改播放状态
   changePlayState(isPlay) {
