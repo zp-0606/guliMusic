@@ -78,7 +78,10 @@ Page({
   //上一首/下一首歌曲的回调
   handleSwitch(event){
       let type=event.currentTarget.id
-      console.log(type)
+      PubSub.subscribe('getMusicId',(msg,musicId)=>{
+          console.log(musicId)
+      })
+      PubSub.publish('switchType',type)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
