@@ -43,6 +43,13 @@ Page({
     this.backgroundAudioManager.onStop(() => {
       this.changePlayState(false)
     })
+    this.backgroundAudioManager.onEnded(()=>{
+      PubSub.publish('switchType', 'next')
+      this.setData({
+        currentWidth:0,
+        currentTime:'00:00'
+      })
+    })
     //监听音乐实时播放的进度
     this.backgroundAudioManager.onTimeUpdate(()=>{
       let currentTime=moment(this.backgroundAudioManager.currentTime*1000).format('mm:ss')
