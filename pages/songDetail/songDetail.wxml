@@ -10,13 +10,13 @@
 
 <!--    进度条区域-->
     <view class="progressControl">
-        <text>00:00</text>
+        <text>{{currentTime}}</text>
         <view class="barControl">
             <view class="audio-currentTime-Bar">
                 <view class="audio-circle"></view>
             </view>
         </view>
-        <text>03:00</text>
+        <text>{{durationTime}}</text>
     </view>
 
 <!--    底部控制播放区域-->

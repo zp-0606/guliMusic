@@ -1,6 +1,7 @@
 // pages/songDetail/songDetail.js
 import request from "../../utils/request";
 import PubSub from 'pubsub-js'
+import moment from "moment";
 const appInstance = getApp()
 Page({
 
@@ -11,7 +12,9 @@ Page({
     isPlay: false,
     song: {},
     musicId: '',
-    musicLink:''
+    musicLink:'',
+    currentTime:'00:00',
+    durationTime:'00:00'
   },
 
   /**
@@ -52,8 +55,10 @@ Page({
     let musicData = await request('/song/detail', {
       ids: musicId
     })
+    let durationTime=moment(musicData.songs[0].dt).format('mm:ss')
     this.setData({
-      song: musicData.songs[0]
+      song: musicData.songs[0],
+      durationTime
     })
     wx.setNavigationBarTitle({
       title: this.data.song.ar[0].name
