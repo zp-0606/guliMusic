@@ -1,7 +1,6 @@
 // pages/songDetail/songDetail.js
-
-
 import request from "../../utils/request";
+import PubSub from 'pubsub-js'
 const appInstance=getApp()
 Page({
 
