@@ -40,12 +40,18 @@ Page({
     PubSub.subscribe('switchType',(msg,type)=>{
       let {recommendList,index}=this.data
       if(type==='pre'){
+        (index===0) && (index=recommendList.length)
         index-=1
       }else{
+        (index===recommendList.length-1)&&(index=-1)
         index+=1
       }
+      this.setData({
+        index
+      })
+      PubSub.publish('getMusicId',recommendList[index].id)
     })
-    PubSub.publish('getMusicId',recommendList[index].id)
+
   },
 
   //获取每日推荐数据

@@ -78,8 +78,11 @@ Page({
   //上一首/下一首歌曲的回调
   handleSwitch(event){
       let type=event.currentTarget.id
+      this.backgroundAudioManager.stop()
       PubSub.subscribe('getMusicId',(msg,musicId)=>{
-          console.log(musicId)
+          this.getSongInfo(musicId)
+          this.musicControl(true,musicId)
+          PubSub.unsubscribe('getMusicId')
       })
       PubSub.publish('switchType',type)
   },
