@@ -1,5 +1,6 @@
 // pages/search/search.js
 import request from "../../utils/request";
+let isSend=false
 Page({
 
   /**
@@ -7,7 +8,9 @@ Page({
    */
   data: {
     keywords:'',
-    hotList:[]
+    hotList:[],
+    searchContent:'',
+    searchList:[],
   },
 
   /**
@@ -23,6 +26,27 @@ Page({
     this.setData({
       keywords:wordsData.data.showKeyword,
       hotList:hotListData.data
+    })
+  },
+  //处理搜索内容
+  handleInputChange(event){
+    this.setData({
+      searchContent:event.detail.value.trim()
+    })
+    if(isSend){
+      return
+    }
+    isSend=true
+    this.getSearchList()
+    setTimeout(()=>{
+      isSend=false
+    },300)
+  },
+  //获取搜索数据
+  async getSearchList(){
+    let searchListData=await request('/search',{keywords:this.data.keywords,limit:10})
+    this.setData({
+      searchList:searchListData.result.songs
     })
   },
   /**

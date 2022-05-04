@@ -3,8 +3,8 @@
 <!--    头部区域-->
     <view class="header">
         <view class="searchInput">
-            <text class="iconfont icon-search1 searchIcon" placeholder-class="placeholder"></text>
-            <input type="text" placeholder="{{keywords}}"/>
+            <text class="iconfont icon-search1 searchIcon"></text>
+            <input type="text" placeholder="{{keywords}}"  placeholder-class="placeholder" bindinput="handleInputChange"/>
         </view>
         <text class="cancel">取消</text>
     </view>
