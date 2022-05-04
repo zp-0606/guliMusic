@@ -10,7 +10,7 @@ Page({
     keywords:'',
     hotList:[],
     searchContent:'',
-    searchList:[],
+    searchList:[]
   },
 
   /**
@@ -44,7 +44,13 @@ Page({
   },
   //获取搜索数据
   async getSearchList(){
-    let searchListData=await request('/search',{keywords:this.data.keywords,limit:10})
+    if(!this.data.searchContent){
+      this.setData({
+        searchList:[]
+      })
+      return;
+    }
+    let searchListData=await request('/search',{keywords:this.data.searchContent,limit:10})
     this.setData({
       searchList:searchListData.result.songs
     })
