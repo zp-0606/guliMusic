@@ -1,6 +1,6 @@
 // pages/search/search.js
 import request from "../../utils/request";
-let isSend=false
+let isSend=null
 Page({
 
   /**
@@ -19,6 +19,14 @@ Page({
    */
   onLoad: function (options) {
     this.searchInit()
+    this.getHistoryList()
+  },
+  //获取搜索历史
+  getHistoryList(){
+    let historyList=wx.getStorageSync('searchList')
+    this.setData({
+      historyList
+    })
   },
   //初始化数据
   async searchInit(){
@@ -31,29 +39,41 @@ Page({
   },
   //处理搜索内容
   handleInputChange(event){
-    this.setData({
-      searchContent:event.detail.value.trim()
-    })
     if(isSend){
-      return
+      clearTimeout(isSend)
     }
-    isSend=true
-    this.getSearchList()
-    setTimeout(()=>{
-      isSend=false
+    isSend=setTimeout(()=>{
+      this.setData({
+        searchContent:event.detail.value.trim()
+      })
+      this.getSearchList()
     },300)
   },
   //获取搜索数据
-  async getSearchList(){
-    if(!this.data.searchContent){
+  async getSearchList() {
+    let {searchContent, historyList} = this.data
+    if (!searchContent) {
       this.setData({
-        searchList:[]
+        searchList: []
       })
       return;
     }
-    let searchListData=await request('/search',{keywords:this.data.searchContent,limit:10})
+    let searchListData = await request('/search', {keywords: searchContent, limit: 10})
+    if(historyList.indexOf(searchContent)!=-1){
+      historyList.splice(historyList.indexOf(searchContent),1)
+    }
+    historyList.unshift(searchContent)
     this.setData({
-      searchList:searchListData.result.songs
+      searchList: searchListData.result.songs,
+      historyList
+    })
+    wx.setStorageSync('searchList', historyList)
+  },
+  //清空搜索内容
+  clearSearchContent(){
+    this.setData({
+      searchContent:'',
+      searchList:[]
     })
   },
   /**
