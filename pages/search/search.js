@@ -10,7 +10,8 @@ Page({
     keywords:'',
     hotList:[],
     searchContent:'',
-    searchList:[]
+    searchList:[],
+    historyList:[]
   },
 
   /**
