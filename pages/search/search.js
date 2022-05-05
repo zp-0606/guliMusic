@@ -24,9 +24,11 @@ Page({
   //获取搜索历史
   getHistoryList(){
     let historyList=wx.getStorageSync('searchList')
-    this.setData({
-      historyList
-    })
+    if(historyList){
+      this.setData({
+        historyList
+      })
+    }
   },
   //初始化数据
   async searchInit(){
@@ -74,6 +76,20 @@ Page({
     this.setData({
       searchContent:'',
       searchList:[]
+    })
+  },
+  //删除搜索记录
+  deleteSearchHistory(){
+    wx.showModal({
+      content:'确定删除吗？',
+      success:(res)=>{
+        if(res.confirm){
+          this.setData({
+            historyList:[]
+          })
+          wx.removeStorageSync('searchList')
+      }
+    }
     })
   },
   /**
