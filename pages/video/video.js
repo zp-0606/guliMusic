@@ -105,6 +105,12 @@ Page({
   async handleToLower(){
     console.log('上拉触底')
   },
+  //跳转至搜索页的回调
+  toSearch(){
+    wx.navigateTo({
+      url:'/pages/search/search'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
