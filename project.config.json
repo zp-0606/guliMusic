@@ -25,7 +25,7 @@
 		"nodeModules": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.24.0",
+	"libVersion": "2.24.1",
 	"appid": "wx8b0f01e72b4b37cf",
 	"projectname": "guliMusic",
 	"debugOptions": {
